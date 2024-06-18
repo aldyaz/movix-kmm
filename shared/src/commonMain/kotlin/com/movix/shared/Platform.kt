@@ -1,4 +1,4 @@
-package com.movix
+package com.movix.shared
 
 interface Platform {
     val name: String

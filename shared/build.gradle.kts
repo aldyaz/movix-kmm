@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    kotlin("plugin.serialization") version libs.versions.kotlin
 }
 
 kotlin {
@@ -40,7 +41,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.movix"
+    namespace = "com.movix.shared"
     compileSdk = 34
     defaultConfig {
         minSdk = 24

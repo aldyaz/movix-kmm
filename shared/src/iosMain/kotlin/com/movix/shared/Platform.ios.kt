@@ -1,4 +1,4 @@
-package com.movix
+package com.movix.shared
 
 import platform.UIKit.UIDevice
 

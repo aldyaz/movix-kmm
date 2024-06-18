@@ -1,4 +1,4 @@
-package com.movix
+package com.movix.shared
 
 class Greeting {
     private val platform: Platform = getPlatform()
