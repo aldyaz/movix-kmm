@@ -26,4 +26,28 @@ class KtorTmdbService(
             }
         }
     }
+
+    override suspend fun getNowPlaying(): MoviesDto {
+        return apiCall {
+            httpClient.get("movie/now_playing") {
+                contentType(ContentType.Application.Json)
+            }
+        }
+    }
+
+    override suspend fun getPopular(): MoviesDto {
+        return apiCall {
+            httpClient.get("movie/popular") {
+                contentType(ContentType.Application.Json)
+            }
+        }
+    }
+
+    override suspend fun getTopRated(): MoviesDto {
+        return apiCall {
+            httpClient.get("movie/top_rated") {
+                contentType(ContentType.Application.Json)
+            }
+        }
+    }
 }

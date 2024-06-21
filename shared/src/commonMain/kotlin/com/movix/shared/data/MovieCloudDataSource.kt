@@ -10,4 +10,10 @@ interface MovieCloudDataSource {
         page: Int
     ): HttpResult<MoviesDto>
 
+    suspend fun getNowPlaying(): HttpResult<MoviesDto>
+
+    suspend fun getPopular(): HttpResult<MoviesDto>
+
+    suspend fun getTopRated(): HttpResult<MoviesDto>
+
 }

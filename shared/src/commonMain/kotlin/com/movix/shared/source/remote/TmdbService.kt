@@ -9,4 +9,10 @@ interface TmdbService {
         page: Int
     ): MoviesDto
 
+    suspend fun getNowPlaying(): MoviesDto
+
+    suspend fun getPopular(): MoviesDto
+
+    suspend fun getTopRated(): MoviesDto
+
 }

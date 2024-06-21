@@ -6,4 +6,4 @@ expect class CommonStateFlow<T>(
     flow: StateFlow<T>
 ) : StateFlow<T>
 
-fun <T> StateFlow<T>.toCommonStateFlow(): StateFlow<T> = CommonStateFlow(this)
+fun <T> StateFlow<T>.toCommonStateFlow(): CommonStateFlow<T> = CommonStateFlow(this)

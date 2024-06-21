@@ -17,4 +17,31 @@ class MovieCloudDataSourceImpl(
             HttpResult.Error(err)
         }
     }
+
+    override suspend fun getNowPlaying(): HttpResult<MoviesDto> {
+        return try {
+            val result = tmdbService.getNowPlaying()
+            HttpResult.Success(result)
+        } catch (err: HttpException) {
+            HttpResult.Error(err)
+        }
+    }
+
+    override suspend fun getPopular(): HttpResult<MoviesDto> {
+        return try {
+            val result = tmdbService.getPopular()
+            HttpResult.Success(result)
+        } catch (err: HttpException) {
+            HttpResult.Error(err)
+        }
+    }
+
+    override suspend fun getTopRated(): HttpResult<MoviesDto> {
+        return try {
+            val result = tmdbService.getTopRated()
+            HttpResult.Success(result)
+        } catch (err: HttpException) {
+            HttpResult.Error(err)
+        }
+    }
 }

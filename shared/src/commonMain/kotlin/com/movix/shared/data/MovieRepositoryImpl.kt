@@ -27,4 +27,40 @@ class MovieRepositoryImpl(
             )
         }
     }
+
+    override suspend fun getNowPlaying(): ResultState<MovieListDomainModel> {
+        return when (val result = movieCloudDataSource.getNowPlaying()) {
+            is HttpResult.Success -> ResultState.Success(
+                moviesToDomainMapper(result.data)
+            )
+
+            is HttpResult.Error -> ResultState.Error(
+                httpExceptionToDomainMapper(result.exception)
+            )
+        }
+    }
+
+    override suspend fun getPopular(): ResultState<MovieListDomainModel> {
+        return when (val result = movieCloudDataSource.getPopular()) {
+            is HttpResult.Success -> ResultState.Success(
+                moviesToDomainMapper(result.data)
+            )
+
+            is HttpResult.Error -> ResultState.Error(
+                httpExceptionToDomainMapper(result.exception)
+            )
+        }
+    }
+
+    override suspend fun getTopRated(): ResultState<MovieListDomainModel> {
+        return when (val result = movieCloudDataSource.getTopRated()) {
+            is HttpResult.Success -> ResultState.Success(
+                moviesToDomainMapper(result.data)
+            )
+
+            is HttpResult.Error -> ResultState.Error(
+                httpExceptionToDomainMapper(result.exception)
+            )
+        }
+    }
 }
