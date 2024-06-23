@@ -1,4 +1,4 @@
-package com.movix.android.main
+package com.movix.android.main.screen
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.movix.android.main.viewmodel.MainViewModel
 import com.movix.android.main.model.MainTabType
 
 @Composable

@@ -1,4 +1,4 @@
-package com.movix.android.main
+package com.movix.android.main.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,6 +20,7 @@ import com.movix.android.component.error.BasicError
 import com.movix.android.component.loading.BasicCircularLoading
 import com.movix.android.component.observer.ScreenEnterObserver
 import com.movix.android.main.mapper.MovieToUiMapper
+import com.movix.android.main.viewmodel.AndroidMainMovieTabViewModel
 import com.movix.shared.presentation.model.DiscoverMovieState
 import com.movix.shared.presentation.model.HomeTabViewIntent
 import com.movix.shared.presentation.model.HomeTabViewState

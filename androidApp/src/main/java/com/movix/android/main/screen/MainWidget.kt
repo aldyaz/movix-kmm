@@ -1,4 +1,4 @@
-package com.movix.android.main
+package com.movix.android.main.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

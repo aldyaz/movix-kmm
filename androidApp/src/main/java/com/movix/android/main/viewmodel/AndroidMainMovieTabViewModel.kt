@@ -1,4 +1,4 @@
-package com.movix.android.main
+package com.movix.android.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

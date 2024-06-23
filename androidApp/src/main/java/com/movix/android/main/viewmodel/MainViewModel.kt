@@ -1,4 +1,4 @@
-package com.movix.android.main
+package com.movix.android.main.viewmodel
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State

@@ -1,4 +1,4 @@
-package com.movix.android.main
+package com.movix.android.main.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
