@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="label_app_name">Movix</string>
+    <string name="label_now_playing">Now Playing</string>
+    <string name="label_popular">Popular</string>
+    <string name="label_top_rated">Top Rated</string>
 </resources>

@@ -12,7 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AndroidHomeViewModel @Inject constructor(
+class AndroidHomeTabViewModel @Inject constructor(
     private val getNowPlayingUseCase: GetNowPlayingUseCase,
     private val getPopularUseCase: GetPopularUseCase,
     private val getTopRatedUseCase: GetTopRatedUseCase,
@@ -29,7 +29,7 @@ class AndroidHomeViewModel @Inject constructor(
         )
     }
 
-    val state = viewModel.state
+    val uiState = viewModel.uiState
 
     fun onDispatchIntent(intent: HomeTabViewIntent) {
         viewModel.onDispatchIntent(intent)

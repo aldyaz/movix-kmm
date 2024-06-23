@@ -3,13 +3,14 @@ package com.movix.android.component.error
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -18,7 +19,7 @@ fun BasicError(
     onRetryClick: () -> Unit
 ) {
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -33,4 +34,13 @@ fun BasicError(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun BasicErrorPreview() {
+    BasicError(
+        modifier = Modifier.aspectRatio(2 / 3f),
+        onRetryClick = {}
+    )
 }

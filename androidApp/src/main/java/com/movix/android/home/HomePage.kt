@@ -1,29 +1,36 @@
 package com.movix.android.home
 
-import android.widget.Toast
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.movix.android.R
 import com.movix.android.component.error.BasicError
 import com.movix.android.component.loading.BasicCircularLoading
-import com.movix.android.home.mapper.DiscoverTypeToUiMapper
-import com.movix.android.home.model.DiscoverSectionUiModel
+import com.movix.android.component.observer.ScreenEnterObserver
+import com.movix.android.home.mapper.MovieToUiMapper
+import com.movix.shared.presentation.model.DiscoverMovieState
+import com.movix.shared.presentation.model.HomeTabViewIntent
 import com.movix.shared.presentation.model.HomeTabViewState
 
 @Composable
 fun HomePage() {
-    val viewModel: AndroidHomeViewModel = hiltViewModel()
-    val uiState by viewModel.state.collectAsStateWithLifecycle()
+    val viewModel: AndroidHomeTabViewModel = hiltViewModel()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    ScreenEnterObserver {
+        viewModel.onDispatchIntent(HomeTabViewIntent.OnEnter)
+    }
     HomeContent(uiState = uiState)
 }
 
@@ -31,58 +38,70 @@ fun HomePage() {
 fun HomeContent(
     uiState: HomeTabViewState
 ) {
-    val context = LocalContext.current
-    val discoverTypeToUiMapper = remember {
-        DiscoverTypeToUiMapper()
-    }
     Scaffold { innerPadding ->
         LazyColumn(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            when {
-                uiState.loading -> item {
-                    BasicCircularLoading()
-                }
-
-                uiState.error -> item {
-                    BasicError {
-                    }
-                }
-
-                else -> {
-                    items(uiState.discoverTypeList.map(discoverTypeToUiMapper)) { section ->
-                        HomeDiscoverSection(
-                            modifier = Modifier.fillMaxWidth(),
-                            section = section
-                        )
-                    }
-                }
+            item {
+                HomeDiscoverSection(
+                    modifier = Modifier.fillMaxWidth(),
+                    title = stringResource(R.string.label_now_playing),
+                    state = uiState.nowPlaying,
+                    onClickMore = {},
+                    onClickItem = {}
+                )
+            }
+            item {
+                HomeDiscoverSection(
+                    modifier = Modifier.fillMaxWidth(),
+                    title = stringResource(R.string.label_popular),
+                    state = uiState.popular,
+                    onClickMore = {},
+                    onClickItem = {}
+                )
+            }
+            item {
+                HomeDiscoverSection(
+                    modifier = Modifier.fillMaxWidth(),
+                    title = stringResource(R.string.label_top_rated),
+                    state = uiState.topRated,
+                    onClickMore = {},
+                    onClickItem = {}
+                )
             }
         }
-    }
-
-    if (uiState.errorMessage.isNotEmpty()) {
-        Toast.makeText(context, uiState.errorMessage, Toast.LENGTH_SHORT).show()
     }
 }
 
 @Composable
 fun HomeDiscoverSection(
     modifier: Modifier = Modifier,
-    section: DiscoverSectionUiModel
+    title: String,
+    state: DiscoverMovieState,
+    onClickMore: () -> Unit,
+    onClickItem: (Long) -> Unit
 ) {
-    Column(
-        modifier = modifier,
-        content = {
-            SectionHeader(
-                title = section.title,
-                onClickMore = {}
+    val movieToUiMapper = remember { MovieToUiMapper() }
+    Column(modifier = modifier.fillMaxWidth()) {
+        SectionHeader(
+            title = title,
+            onClickMore = onClickMore
+        )
+        when {
+            state.loading -> BasicCircularLoading(
+                modifier = Modifier.aspectRatio(4 / 3f)
             )
-            MovieRowList(
-                items = section.items,
-                onClickItem = { movieId ->
-                }
+
+            state.error -> BasicError(
+                modifier = Modifier.aspectRatio(4 / 3f),
+                onRetryClick = {}
+            )
+
+            else -> MovieRowList(
+                items = state.items.map(movieToUiMapper),
+                onClickItem = onClickItem
             )
         }
-    )
+    }
 }

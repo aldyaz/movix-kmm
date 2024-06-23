@@ -1,8 +1,7 @@
 package com.movix.shared.presentation.model
 
 data class HomeTabViewState(
-    val loading: Boolean = true,
-    val error: Boolean = false,
-    val errorMessage: String = "",
-    val discoverTypeList: List<DiscoverTypePresentationModel> = listOf()
+    val nowPlaying: DiscoverMovieState = DiscoverMovieState.Initial,
+    val popular: DiscoverMovieState = DiscoverMovieState.Initial,
+    val topRated: DiscoverMovieState = DiscoverMovieState.Initial
 )

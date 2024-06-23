@@ -6,19 +6,18 @@ import com.movix.shared.domain.base.ResultState
 import com.movix.shared.domain.interactor.GetNowPlayingUseCase
 import com.movix.shared.domain.interactor.GetPopularUseCase
 import com.movix.shared.domain.interactor.GetTopRatedUseCase
-import com.movix.shared.domain.model.MovieListDomainModel
 import com.movix.shared.presentation.mapper.MovieToPresentationMapper
-import com.movix.shared.presentation.model.DiscoverTypePresentationModel
+import com.movix.shared.presentation.model.DiscoverMovieState
 import com.movix.shared.presentation.model.HomeTabViewIntent
 import com.movix.shared.presentation.model.HomeTabViewState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class HomeTabViewModel(
     private val getNowPlayingUseCase: GetNowPlayingUseCase,
@@ -30,58 +29,21 @@ class HomeTabViewModel(
 
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
 
-    private val _nowPlayingFlow: Flow<ResultState<MovieListDomainModel>> = flow {
-        emit(getNowPlayingUseCase(Unit))
-    }
-    private val _popularFlow: Flow<ResultState<MovieListDomainModel>> = flow {
-        emit(getPopularUseCase(Unit))
-    }
-    private val _topRatedFlow: Flow<ResultState<MovieListDomainModel>> = flow {
-        emit(getTopRatedUseCase(Unit))
-    }
+    private val _nowPlayingState = MutableStateFlow(DiscoverMovieState.Initial)
+    private val _popularState = MutableStateFlow(DiscoverMovieState.Initial)
+    private val _topRatedState = MutableStateFlow(DiscoverMovieState.Initial)
 
-    private val _state = MutableStateFlow(HomeTabViewState())
-    val state = combine(
-        _state,
-        _nowPlayingFlow,
-        _popularFlow,
-        _topRatedFlow
+    private val _uiState = MutableStateFlow(HomeTabViewState())
+    val uiState = combine(
+        _uiState,
+        _nowPlayingState,
+        _popularState,
+        _topRatedState
     ) { state, nowPlaying, popular, topRated ->
-        val results = mutableListOf<DiscoverTypePresentationModel>()
-        if (nowPlaying is ResultState.Success) {
-            results.add(
-                DiscoverTypePresentationModel(
-                    type = DiscoverTypePresentationModel.Type.NOW_PLAYING,
-                    items = nowPlaying.data.movies.map(movieToPresentationMapper)
-                )
-            )
-        }
-        if (popular is ResultState.Success) {
-            results.add(
-                DiscoverTypePresentationModel(
-                    type = DiscoverTypePresentationModel.Type.POPULAR,
-                    items = popular.data.movies.map(movieToPresentationMapper)
-                )
-            )
-        }
-        if (topRated is ResultState.Success) {
-            results.add(
-                DiscoverTypePresentationModel(
-                    type = DiscoverTypePresentationModel.Type.TOP_RATED,
-                    items = topRated.data.movies.map(movieToPresentationMapper)
-                )
-            )
-        }
-
-        val isError = nowPlaying is ResultState.Error ||
-                popular is ResultState.Error ||
-                topRated is ResultState.Error
-
         state.copy(
-            loading = false,
-            error = isError,
-            errorMessage = (nowPlaying as? ResultState.Error)?.exception?.message.orEmpty(),
-            discoverTypeList = results
+            nowPlaying = nowPlaying,
+            popular = popular,
+            topRated = topRated
         )
     }.stateIn(
         scope = viewModelScope,
@@ -91,7 +53,95 @@ class HomeTabViewModel(
 
     override fun onDispatchIntent(intent: HomeTabViewIntent) {
         when (intent) {
-            is HomeTabViewIntent.Retry -> {}
+            is HomeTabViewIntent.OnEnter -> {
+                getNowPlaying()
+                getPopular()
+                getTopRated()
+            }
+        }
+    }
+
+    private fun getNowPlaying() = viewModelScope.launch {
+        _nowPlayingState.update {
+            it.copy(
+                loading = true,
+                error = false
+            )
+        }
+        when (val result = getNowPlayingUseCase(Unit)) {
+            is ResultState.Success -> {
+                _nowPlayingState.update {
+                    it.copy(
+                        loading = false,
+                        items = result.data.movies.map(movieToPresentationMapper)
+                    )
+                }
+            }
+
+            is ResultState.Error -> {
+                _nowPlayingState.update {
+                    it.copy(
+                        loading = false,
+                        error = true
+                    )
+                }
+            }
+        }
+    }
+
+    private fun getPopular() = viewModelScope.launch {
+        _popularState.update {
+            it.copy(
+                loading = true,
+                error = false
+            )
+        }
+        when (val result = getPopularUseCase(Unit)) {
+            is ResultState.Success -> {
+                _popularState.update {
+                    it.copy(
+                        loading = false,
+                        items = result.data.movies.map(movieToPresentationMapper)
+                    )
+                }
+            }
+
+            is ResultState.Error -> {
+                _popularState.update {
+                    it.copy(
+                        loading = false,
+                        error = true
+                    )
+                }
+            }
+        }
+    }
+
+    private fun getTopRated() = viewModelScope.launch {
+        _topRatedState.update {
+            it.copy(
+                loading = true,
+                error = false
+            )
+        }
+        when (val result = getTopRatedUseCase(Unit)) {
+            is ResultState.Success -> {
+                _topRatedState.update {
+                    it.copy(
+                        loading = false,
+                        items = result.data.movies.map(movieToPresentationMapper)
+                    )
+                }
+            }
+
+            is ResultState.Error -> {
+                _topRatedState.update {
+                    it.copy(
+                        loading = false,
+                        error = true
+                    )
+                }
+            }
         }
     }
 }
