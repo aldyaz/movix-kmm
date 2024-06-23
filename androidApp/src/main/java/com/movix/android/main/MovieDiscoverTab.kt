@@ -1,12 +1,12 @@
-package com.movix.android.home
+package com.movix.android.main
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -19,63 +19,70 @@ import com.movix.android.R
 import com.movix.android.component.error.BasicError
 import com.movix.android.component.loading.BasicCircularLoading
 import com.movix.android.component.observer.ScreenEnterObserver
-import com.movix.android.home.mapper.MovieToUiMapper
+import com.movix.android.main.mapper.MovieToUiMapper
 import com.movix.shared.presentation.model.DiscoverMovieState
 import com.movix.shared.presentation.model.HomeTabViewIntent
 import com.movix.shared.presentation.model.HomeTabViewState
 
 @Composable
-fun HomePage() {
-    val viewModel: AndroidHomeTabViewModel = hiltViewModel()
+fun MovieDiscoverTab(
+    modifier: Modifier = Modifier
+) {
+    val viewModel: AndroidMainMovieTabViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     ScreenEnterObserver {
         viewModel.onDispatchIntent(HomeTabViewIntent.OnEnter)
     }
-    HomeContent(uiState = uiState)
+    MovieDiscoverTabContent(
+        modifier = modifier,
+        uiState = uiState
+    )
 }
 
 @Composable
-fun HomeContent(
+fun MovieDiscoverTabContent(
+    modifier: Modifier = Modifier,
     uiState: HomeTabViewState
 ) {
-    Scaffold { innerPadding ->
-        LazyColumn(
-            modifier = Modifier.padding(innerPadding),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            item {
-                HomeDiscoverSection(
-                    modifier = Modifier.fillMaxWidth(),
-                    title = stringResource(R.string.label_now_playing),
-                    state = uiState.nowPlaying,
-                    onClickMore = {},
-                    onClickItem = {}
-                )
-            }
-            item {
-                HomeDiscoverSection(
-                    modifier = Modifier.fillMaxWidth(),
-                    title = stringResource(R.string.label_popular),
-                    state = uiState.popular,
-                    onClickMore = {},
-                    onClickItem = {}
-                )
-            }
-            item {
-                HomeDiscoverSection(
-                    modifier = Modifier.fillMaxWidth(),
-                    title = stringResource(R.string.label_top_rated),
-                    state = uiState.topRated,
-                    onClickMore = {},
-                    onClickItem = {}
-                )
-            }
+    LazyColumn(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        item {
+            DiscoverSection(
+                modifier = Modifier.fillMaxWidth(),
+                title = stringResource(R.string.label_now_playing),
+                state = uiState.nowPlaying,
+                onClickMore = {},
+                onClickItem = {}
+            )
+        }
+        item {
+            DiscoverSection(
+                modifier = Modifier.fillMaxWidth(),
+                title = stringResource(R.string.label_popular),
+                state = uiState.popular,
+                onClickMore = {},
+                onClickItem = {}
+            )
+        }
+        item {
+            DiscoverSection(
+                modifier = Modifier.fillMaxWidth(),
+                title = stringResource(R.string.label_top_rated),
+                state = uiState.topRated,
+                onClickMore = {},
+                onClickItem = {}
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
 
 @Composable
-fun HomeDiscoverSection(
+fun DiscoverSection(
     modifier: Modifier = Modifier,
     title: String,
     state: DiscoverMovieState,

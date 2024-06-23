@@ -1,18 +1,18 @@
-package com.movix.android.home
+package com.movix.android.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.movix.shared.domain.interactor.GetNowPlayingUseCase
 import com.movix.shared.domain.interactor.GetPopularUseCase
 import com.movix.shared.domain.interactor.GetTopRatedUseCase
-import com.movix.shared.presentation.HomeTabViewModel
+import com.movix.shared.presentation.MainMovieTabViewModel
 import com.movix.shared.presentation.mapper.MovieToPresentationMapper
 import com.movix.shared.presentation.model.HomeTabViewIntent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AndroidHomeTabViewModel @Inject constructor(
+class AndroidMainMovieTabViewModel @Inject constructor(
     private val getNowPlayingUseCase: GetNowPlayingUseCase,
     private val getPopularUseCase: GetPopularUseCase,
     private val getTopRatedUseCase: GetTopRatedUseCase,
@@ -20,7 +20,7 @@ class AndroidHomeTabViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val viewModel by lazy {
-        HomeTabViewModel(
+        MainMovieTabViewModel(
             getNowPlayingUseCase = getNowPlayingUseCase,
             getPopularUseCase = getPopularUseCase,
             getTopRatedUseCase = getTopRatedUseCase,

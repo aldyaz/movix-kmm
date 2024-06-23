@@ -1,4 +1,4 @@
-package com.movix.android.home.mapper
+package com.movix.android.main.mapper
 
 import com.movix.android.model.MovieUiModel
 import com.movix.shared.presentation.model.MoviePresentationModel

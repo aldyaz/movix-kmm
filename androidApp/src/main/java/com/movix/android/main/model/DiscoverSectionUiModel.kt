@@ -1,4 +1,4 @@
-package com.movix.android.home.model
+package com.movix.android.main.model
 
 import com.movix.android.model.MovieUiModel
 

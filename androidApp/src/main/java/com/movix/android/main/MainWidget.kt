@@ -1,4 +1,4 @@
-package com.movix.android.home
+package com.movix.android.main
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -11,8 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.filled.ArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -47,15 +48,14 @@ fun SectionHeader(
             style = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center
         )
-
         Icon(
-            imageVector = Icons.Default.KeyboardArrowRight,
+            imageVector = Icons.AutoMirrored.Filled.ArrowRight,
+            contentDescription = null,
             modifier = Modifier
                 .size(32.dp)
                 .clickable {
                     onClickMore()
-                },
-            contentDescription = null
+                }
         )
     }
 }
@@ -77,15 +77,15 @@ fun MovieRowList(
             MoviePoster(
                 imageUrl = MovieImageApi.imageW500Url(item.posterPath),
                 contentDescription = item.title,
+                onClick = {
+                    onClickItem(item.id)
+                },
                 modifier = Modifier
                     .aspectRatio(2 / 3f)
                     .padding(
                         start = index.getLeftSpaceMargin(),
                         end = index.getRightSpaceMargin(items.size)
-                    ),
-                onClick = {
-                    onClickItem(item.id)
-                }
+                    )
             )
         }
     }
@@ -93,12 +93,15 @@ fun MovieRowList(
 
 @Composable
 fun MoviePoster(
-    imageUrl: String,
-    contentDescription: String?,
     modifier: Modifier = Modifier,
-    onClick: (() -> Unit)? = null
+    onClick: (() -> Unit)? = null,
+    imageUrl: String,
+    contentDescription: String?
 ) {
-    Card(modifier = modifier) {
+    Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(4.dp)
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
