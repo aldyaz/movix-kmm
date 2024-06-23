@@ -5,3 +5,14 @@ plugins {
     alias(libs.plugins.kotlinAndroid).apply(false)
     alias(libs.plugins.kotlinMultiplatform).apply(false)
 }
+
+buildscript {
+
+    dependencies {
+        classpath(libs.hilt.android.gradle.plugin)
+    }
+}
+
+tasks.register("clean", Delete::class) {
+    delete(rootProject.layout.buildDirectory)
+}

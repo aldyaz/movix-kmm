@@ -9,29 +9,14 @@ import com.movix.shared.domain.model.MovieListDomainModel
 
 class MovieRepositoryImpl(
     private val movieCloudDataSource: MovieCloudDataSource,
-    private val moviesToDomainMapper: MovieListToDomainMapper,
+    private val movieListToDomainMapper: MovieListToDomainMapper,
     private val httpExceptionToDomainMapper: HttpExceptionToDomainMapper
 ) : MovieRepository {
-
-    override suspend fun getMovies(
-        preference: String,
-        page: Int
-    ): ResultState<MovieListDomainModel> {
-        return when (val result = movieCloudDataSource.getMovies(preference, page)) {
-            is HttpResult.Success -> ResultState.Success(
-                moviesToDomainMapper(result.data)
-            )
-
-            is HttpResult.Error -> ResultState.Error(
-                httpExceptionToDomainMapper(result.exception)
-            )
-        }
-    }
 
     override suspend fun getNowPlaying(): ResultState<MovieListDomainModel> {
         return when (val result = movieCloudDataSource.getNowPlaying()) {
             is HttpResult.Success -> ResultState.Success(
-                moviesToDomainMapper(result.data)
+                movieListToDomainMapper(result.data)
             )
 
             is HttpResult.Error -> ResultState.Error(
@@ -43,7 +28,7 @@ class MovieRepositoryImpl(
     override suspend fun getPopular(): ResultState<MovieListDomainModel> {
         return when (val result = movieCloudDataSource.getPopular()) {
             is HttpResult.Success -> ResultState.Success(
-                moviesToDomainMapper(result.data)
+                movieListToDomainMapper(result.data)
             )
 
             is HttpResult.Error -> ResultState.Error(
@@ -55,7 +40,7 @@ class MovieRepositoryImpl(
     override suspend fun getTopRated(): ResultState<MovieListDomainModel> {
         return when (val result = movieCloudDataSource.getTopRated()) {
             is HttpResult.Success -> ResultState.Success(
-                moviesToDomainMapper(result.data)
+                movieListToDomainMapper(result.data)
             )
 
             is HttpResult.Error -> ResultState.Error(
