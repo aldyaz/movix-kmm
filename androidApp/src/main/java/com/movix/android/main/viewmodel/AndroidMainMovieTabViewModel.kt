@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.movix.shared.domain.interactor.GetNowPlayingMoviesUseCase
 import com.movix.shared.domain.interactor.GetPopularMoviesUseCase
 import com.movix.shared.domain.interactor.GetTopRatedMoviesUseCase
-import com.movix.shared.presentation.MainMovieTabViewModel
+import com.movix.shared.presentation.viewmodel.MainMovieTabViewModel
 import com.movix.shared.presentation.mapper.MovieToPresentationMapper
 import com.movix.shared.presentation.model.HomeTabViewIntent
 import dagger.hilt.android.lifecycle.HiltViewModel

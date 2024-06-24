@@ -1,4 +1,4 @@
-package com.movix.shared.presentation
+package com.movix.shared.presentation.viewmodel
 
 import com.movix.shared.common.presentation.BaseViewModel
 import com.movix.shared.common.presentation.toCommonStateFlow
