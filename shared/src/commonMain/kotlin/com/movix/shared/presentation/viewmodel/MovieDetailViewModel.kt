@@ -1,6 +1,8 @@
 package com.movix.shared.presentation.viewmodel
 
 import com.movix.shared.common.presentation.BaseViewModel
+import com.movix.shared.common.presentation.CommonStateFlow
+import com.movix.shared.common.presentation.toCommonStateFlow
 import com.movix.shared.domain.base.ResultState
 import com.movix.shared.domain.interactor.GetMovieDetailUseCase
 import com.movix.shared.presentation.mapper.MovieToPresentationMapper
@@ -9,6 +11,7 @@ import com.movix.shared.presentation.model.MovieDetailState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -21,6 +24,8 @@ class MovieDetailViewModel(
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
 
     private val _uiState = MutableStateFlow(MovieDetailState())
+    val uiState: CommonStateFlow<MovieDetailState>
+        get() = _uiState.asStateFlow().toCommonStateFlow()
 
     override fun onDispatchIntent(intent: MovieDetailIntent) {
         when (intent) {

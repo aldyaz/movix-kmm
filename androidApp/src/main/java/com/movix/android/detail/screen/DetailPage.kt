@@ -1,4 +1,4 @@
-package com.movix.android.detail
+package com.movix.android.detail.screen
 
 import androidx.compose.runtime.Composable
 
