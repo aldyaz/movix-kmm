@@ -3,9 +3,9 @@ package com.movix.android.di
 import com.movix.shared.domain.MovieRepository
 import com.movix.shared.domain.base.CoroutineContextProvider
 import com.movix.shared.domain.interactor.GetMovieDetailUseCase
-import com.movix.shared.domain.interactor.GetNowPlayingUseCase
-import com.movix.shared.domain.interactor.GetPopularUseCase
-import com.movix.shared.domain.interactor.GetTopRatedUseCase
+import com.movix.shared.domain.interactor.GetNowPlayingMoviesUseCase
+import com.movix.shared.domain.interactor.GetPopularMoviesUseCase
+import com.movix.shared.domain.interactor.GetTopRatedMoviesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +24,7 @@ class DomainModule {
     fun provideGetNowPlayingUseCase(
         movieRepository: MovieRepository,
         coroutineContextProvider: CoroutineContextProvider
-    ): GetNowPlayingUseCase = GetNowPlayingUseCase(
+    ): GetNowPlayingMoviesUseCase = GetNowPlayingMoviesUseCase(
         movieRepository = movieRepository,
         coroutineContextProvider = coroutineContextProvider
     )
@@ -33,7 +33,7 @@ class DomainModule {
     fun provideGetPopularUseCase(
         movieRepository: MovieRepository,
         coroutineContextProvider: CoroutineContextProvider
-    ): GetPopularUseCase = GetPopularUseCase(
+    ): GetPopularMoviesUseCase = GetPopularMoviesUseCase(
         movieRepository = movieRepository,
         coroutineContextProvider = coroutineContextProvider
     )
@@ -42,7 +42,7 @@ class DomainModule {
     fun provideGetTopRatedUseCase(
         movieRepository: MovieRepository,
         coroutineContextProvider: CoroutineContextProvider
-    ): GetTopRatedUseCase = GetTopRatedUseCase(
+    ): GetTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(
         movieRepository = movieRepository,
         coroutineContextProvider = coroutineContextProvider
     )

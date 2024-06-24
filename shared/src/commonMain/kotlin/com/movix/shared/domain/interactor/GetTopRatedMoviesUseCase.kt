@@ -7,14 +7,14 @@ import com.movix.shared.domain.base.UseCase
 import com.movix.shared.domain.model.MovieListDomainModel
 import kotlinx.coroutines.withContext
 
-class GetPopularUseCase(
+class GetTopRatedMoviesUseCase(
     private val movieRepository: MovieRepository,
     private val coroutineContextProvider: CoroutineContextProvider
 ) : UseCase<Unit, MovieListDomainModel>() {
 
     override suspend fun execute(param: Unit): ResultState<MovieListDomainModel> {
         return withContext(coroutineContextProvider.io) {
-            movieRepository.getPopular()
+            movieRepository.getTopRatedMovies()
         }
     }
 }

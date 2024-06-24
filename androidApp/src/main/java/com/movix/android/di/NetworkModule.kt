@@ -1,8 +1,8 @@
 package com.movix.android.di
 
 import com.movix.shared.remote.HttpClientFactory
-import com.movix.shared.source.remote.KtorTmdbRemoteService
-import com.movix.shared.source.remote.TmdbRemoteService
+import com.movix.shared.source.remote.KtorTmdbMovieRemoteService
+import com.movix.shared.source.remote.TmdbMovieRemoteService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,6 +22,6 @@ class NetworkModule {
     @Provides
     fun provideTmdbService(
         httpClient: HttpClient
-    ): TmdbRemoteService = KtorTmdbRemoteService(httpClient)
+    ): TmdbMovieRemoteService = KtorTmdbMovieRemoteService(httpClient)
 
 }

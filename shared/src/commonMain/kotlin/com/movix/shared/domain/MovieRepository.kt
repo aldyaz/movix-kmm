@@ -6,11 +6,11 @@ import com.movix.shared.domain.model.MovieListDomainModel
 
 interface MovieRepository {
 
-    suspend fun getNowPlaying(): ResultState<MovieListDomainModel>
+    suspend fun getNowPlayingMovies(): ResultState<MovieListDomainModel>
 
-    suspend fun getPopular(): ResultState<MovieListDomainModel>
+    suspend fun getPopularMovies(): ResultState<MovieListDomainModel>
 
-    suspend fun getTopRated(): ResultState<MovieListDomainModel>
+    suspend fun getTopRatedMovies(): ResultState<MovieListDomainModel>
 
     suspend fun getMovieDetail(id: Long): ResultState<MovieDomainModel>
 

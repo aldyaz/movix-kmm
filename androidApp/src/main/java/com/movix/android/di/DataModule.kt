@@ -7,7 +7,7 @@ import com.movix.shared.domain.MovieRepository
 import com.movix.shared.domain.mapper.HttpExceptionToDomainMapper
 import com.movix.shared.domain.mapper.MovieListToDomainMapper
 import com.movix.shared.domain.mapper.MovieToDomainMapper
-import com.movix.shared.source.remote.TmdbRemoteService
+import com.movix.shared.source.remote.TmdbMovieRemoteService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,8 +31,8 @@ class DataModule {
 
     @Provides
     fun provideMovieCloudDataSource(
-        tmdbRemoteService: TmdbRemoteService
-    ): MovieCloudDataSource = MovieCloudDataSourceImpl(tmdbRemoteService)
+        tmdbMovieRemoteService: TmdbMovieRemoteService
+    ): MovieCloudDataSource = MovieCloudDataSourceImpl(tmdbMovieRemoteService)
 
     @Provides
     fun provideMovieRepository(

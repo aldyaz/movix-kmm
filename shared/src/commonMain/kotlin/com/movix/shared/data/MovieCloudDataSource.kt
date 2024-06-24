@@ -6,11 +6,11 @@ import com.movix.shared.source.remote.model.MoviesDto
 
 interface MovieCloudDataSource {
 
-    suspend fun getNowPlaying(): HttpResult<MoviesDto>
+    suspend fun getNowPlayingMovies(): HttpResult<MoviesDto>
 
-    suspend fun getPopular(): HttpResult<MoviesDto>
+    suspend fun getPopularMovies(): HttpResult<MoviesDto>
 
-    suspend fun getTopRated(): HttpResult<MoviesDto>
+    suspend fun getTopRatedMovies(): HttpResult<MoviesDto>
 
     suspend fun getMovieDetail(id: Long): HttpResult<MovieDto>
 

@@ -16,8 +16,8 @@ class MovieRepositoryImpl(
     private val httpExceptionToDomainMapper: HttpExceptionToDomainMapper
 ) : MovieRepository {
 
-    override suspend fun getNowPlaying(): ResultState<MovieListDomainModel> {
-        return when (val result = movieCloudDataSource.getNowPlaying()) {
+    override suspend fun getNowPlayingMovies(): ResultState<MovieListDomainModel> {
+        return when (val result = movieCloudDataSource.getNowPlayingMovies()) {
             is HttpResult.Success -> ResultState.Success(
                 movieListToDomainMapper(result.data)
             )
@@ -28,8 +28,8 @@ class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun getPopular(): ResultState<MovieListDomainModel> {
-        return when (val result = movieCloudDataSource.getPopular()) {
+    override suspend fun getPopularMovies(): ResultState<MovieListDomainModel> {
+        return when (val result = movieCloudDataSource.getPopularMovies()) {
             is HttpResult.Success -> ResultState.Success(
                 movieListToDomainMapper(result.data)
             )
@@ -40,8 +40,8 @@ class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun getTopRated(): ResultState<MovieListDomainModel> {
-        return when (val result = movieCloudDataSource.getTopRated()) {
+    override suspend fun getTopRatedMovies(): ResultState<MovieListDomainModel> {
+        return when (val result = movieCloudDataSource.getTopRatedMovies()) {
             is HttpResult.Success -> ResultState.Success(
                 movieListToDomainMapper(result.data)
             )

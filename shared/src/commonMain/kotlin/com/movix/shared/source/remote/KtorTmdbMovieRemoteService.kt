@@ -5,27 +5,25 @@ import com.movix.shared.source.remote.model.MovieDto
 import com.movix.shared.source.remote.model.MoviesDto
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.http.parameters
 import io.ktor.http.path
 
-class KtorTmdbRemoteService(
+class KtorTmdbMovieRemoteService(
     private val httpClient: HttpClient
-) : TmdbRemoteService {
+) : TmdbMovieRemoteService {
 
-    override suspend fun getNowPlaying(): MoviesDto {
+    override suspend fun getNowPlayingMovies(): MoviesDto {
         return apiCall {
             httpClient.get("movie/now_playing")
         }
     }
 
-    override suspend fun getPopular(): MoviesDto {
+    override suspend fun getPopularMovies(): MoviesDto {
         return apiCall {
             httpClient.get("movie/popular")
         }
     }
 
-    override suspend fun getTopRated(): MoviesDto {
+    override suspend fun getTopRatedMovies(): MoviesDto {
         return apiCall {
             httpClient.get("movie/top_rated")
         }

@@ -3,13 +3,13 @@ package com.movix.shared.source.remote
 import com.movix.shared.source.remote.model.MovieDto
 import com.movix.shared.source.remote.model.MoviesDto
 
-interface TmdbRemoteService {
+interface TmdbMovieRemoteService {
 
-    suspend fun getNowPlaying(): MoviesDto
+    suspend fun getNowPlayingMovies(): MoviesDto
 
-    suspend fun getPopular(): MoviesDto
+    suspend fun getPopularMovies(): MoviesDto
 
-    suspend fun getTopRated(): MoviesDto
+    suspend fun getTopRatedMovies(): MoviesDto
 
     suspend fun getMovieDetail(id: Long): MovieDto
 

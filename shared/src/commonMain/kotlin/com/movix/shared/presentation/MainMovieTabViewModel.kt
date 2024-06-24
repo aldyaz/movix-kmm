@@ -3,9 +3,9 @@ package com.movix.shared.presentation
 import com.movix.shared.common.presentation.BaseViewModel
 import com.movix.shared.common.presentation.toCommonStateFlow
 import com.movix.shared.domain.base.ResultState
-import com.movix.shared.domain.interactor.GetNowPlayingUseCase
-import com.movix.shared.domain.interactor.GetPopularUseCase
-import com.movix.shared.domain.interactor.GetTopRatedUseCase
+import com.movix.shared.domain.interactor.GetNowPlayingMoviesUseCase
+import com.movix.shared.domain.interactor.GetPopularMoviesUseCase
+import com.movix.shared.domain.interactor.GetTopRatedMoviesUseCase
 import com.movix.shared.presentation.mapper.MovieToPresentationMapper
 import com.movix.shared.presentation.model.DiscoverMovieState
 import com.movix.shared.presentation.model.HomeTabViewIntent
@@ -20,9 +20,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MainMovieTabViewModel(
-    private val getNowPlayingUseCase: GetNowPlayingUseCase,
-    private val getPopularUseCase: GetPopularUseCase,
-    private val getTopRatedUseCase: GetTopRatedUseCase,
+    private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase,
+    private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
+    private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
     private val movieToPresentationMapper: MovieToPresentationMapper,
     coroutineScope: CoroutineScope?
 ) : BaseViewModel<HomeTabViewIntent>() {
@@ -68,7 +68,7 @@ class MainMovieTabViewModel(
                 error = false
             )
         }
-        when (val result = getNowPlayingUseCase(Unit)) {
+        when (val result = getNowPlayingMoviesUseCase(Unit)) {
             is ResultState.Success -> {
                 _nowPlayingState.update {
                     it.copy(
@@ -96,7 +96,7 @@ class MainMovieTabViewModel(
                 error = false
             )
         }
-        when (val result = getPopularUseCase(Unit)) {
+        when (val result = getPopularMoviesUseCase(Unit)) {
             is ResultState.Success -> {
                 _popularState.update {
                     it.copy(
@@ -124,7 +124,7 @@ class MainMovieTabViewModel(
                 error = false
             )
         }
-        when (val result = getTopRatedUseCase(Unit)) {
+        when (val result = getTopRatedMoviesUseCase(Unit)) {
             is ResultState.Success -> {
                 _topRatedState.update {
                     it.copy(

@@ -2,35 +2,35 @@ package com.movix.shared.data
 
 import com.movix.shared.data.base.HttpResult
 import com.movix.shared.exception.HttpException
-import com.movix.shared.source.remote.TmdbRemoteService
+import com.movix.shared.source.remote.TmdbMovieRemoteService
 import com.movix.shared.source.remote.model.MovieDto
 import com.movix.shared.source.remote.model.MoviesDto
 
 class MovieCloudDataSourceImpl(
-    private val tmdbRemoteService: TmdbRemoteService
+    private val tmdbMovieRemoteService: TmdbMovieRemoteService
 ) : MovieCloudDataSource {
 
-    override suspend fun getNowPlaying(): HttpResult<MoviesDto> {
+    override suspend fun getNowPlayingMovies(): HttpResult<MoviesDto> {
         return try {
-            val result = tmdbRemoteService.getNowPlaying()
+            val result = tmdbMovieRemoteService.getNowPlayingMovies()
             HttpResult.Success(result)
         } catch (err: HttpException) {
             HttpResult.Error(err)
         }
     }
 
-    override suspend fun getPopular(): HttpResult<MoviesDto> {
+    override suspend fun getPopularMovies(): HttpResult<MoviesDto> {
         return try {
-            val result = tmdbRemoteService.getPopular()
+            val result = tmdbMovieRemoteService.getPopularMovies()
             HttpResult.Success(result)
         } catch (err: HttpException) {
             HttpResult.Error(err)
         }
     }
 
-    override suspend fun getTopRated(): HttpResult<MoviesDto> {
+    override suspend fun getTopRatedMovies(): HttpResult<MoviesDto> {
         return try {
-            val result = tmdbRemoteService.getTopRated()
+            val result = tmdbMovieRemoteService.getTopRatedMovies()
             HttpResult.Success(result)
         } catch (err: HttpException) {
             HttpResult.Error(err)
@@ -39,7 +39,7 @@ class MovieCloudDataSourceImpl(
 
     override suspend fun getMovieDetail(id: Long): HttpResult<MovieDto> {
         return try {
-            val result = tmdbRemoteService.getMovieDetail(id)
+            val result = tmdbMovieRemoteService.getMovieDetail(id)
             HttpResult.Success(result)
         } catch (err: HttpException) {
             HttpResult.Error(err)
