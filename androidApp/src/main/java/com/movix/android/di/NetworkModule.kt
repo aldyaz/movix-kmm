@@ -1,8 +1,8 @@
 package com.movix.android.di
 
 import com.movix.shared.remote.HttpClientFactory
-import com.movix.shared.source.remote.KtorTmdbMovieRemoteService
-import com.movix.shared.source.remote.TmdbMovieRemoteService
+import com.movix.shared.source.remote.service.KtorTmdbMovieRemoteService
+import com.movix.shared.source.remote.service.TmdbMovieRemoteService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

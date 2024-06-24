@@ -2,7 +2,7 @@ package com.movix.shared.data
 
 import com.movix.shared.data.base.HttpResult
 import com.movix.shared.exception.HttpException
-import com.movix.shared.source.remote.TmdbMovieRemoteService
+import com.movix.shared.source.remote.service.TmdbMovieRemoteService
 import com.movix.shared.source.remote.model.MovieDto
 import com.movix.shared.source.remote.model.MoviesDto
 

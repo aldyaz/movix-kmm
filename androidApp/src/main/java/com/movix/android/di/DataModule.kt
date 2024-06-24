@@ -7,7 +7,7 @@ import com.movix.shared.domain.MovieRepository
 import com.movix.shared.domain.mapper.HttpExceptionToDomainMapper
 import com.movix.shared.domain.mapper.MovieListToDomainMapper
 import com.movix.shared.domain.mapper.MovieToDomainMapper
-import com.movix.shared.source.remote.TmdbMovieRemoteService
+import com.movix.shared.source.remote.service.TmdbMovieRemoteService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

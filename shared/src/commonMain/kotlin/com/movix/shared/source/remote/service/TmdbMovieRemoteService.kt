@@ -1,4 +1,4 @@
-package com.movix.shared.source.remote
+package com.movix.shared.source.remote.service
 
 import com.movix.shared.source.remote.model.MovieDto
 import com.movix.shared.source.remote.model.MoviesDto
