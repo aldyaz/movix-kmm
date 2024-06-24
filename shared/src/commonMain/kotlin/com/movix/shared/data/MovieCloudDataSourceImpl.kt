@@ -3,6 +3,7 @@ package com.movix.shared.data
 import com.movix.shared.data.base.HttpResult
 import com.movix.shared.exception.HttpException
 import com.movix.shared.source.remote.TmdbRemoteService
+import com.movix.shared.source.remote.model.MovieDto
 import com.movix.shared.source.remote.model.MoviesDto
 
 class MovieCloudDataSourceImpl(
@@ -30,6 +31,15 @@ class MovieCloudDataSourceImpl(
     override suspend fun getTopRated(): HttpResult<MoviesDto> {
         return try {
             val result = tmdbRemoteService.getTopRated()
+            HttpResult.Success(result)
+        } catch (err: HttpException) {
+            HttpResult.Error(err)
+        }
+    }
+
+    override suspend fun getMovieDetail(id: Long): HttpResult<MovieDto> {
+        return try {
+            val result = tmdbRemoteService.getMovieDetail(id)
             HttpResult.Success(result)
         } catch (err: HttpException) {
             HttpResult.Error(err)

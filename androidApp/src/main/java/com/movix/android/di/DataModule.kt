@@ -38,10 +38,12 @@ class DataModule {
     fun provideMovieRepository(
         movieCloudDataSource: MovieCloudDataSource,
         movieListToDomainMapper: MovieListToDomainMapper,
+        movieToDomainMapper: MovieToDomainMapper,
         httpExceptionToDomainMapper: HttpExceptionToDomainMapper
     ): MovieRepository = MovieRepositoryImpl(
         movieCloudDataSource = movieCloudDataSource,
         movieListToDomainMapper = movieListToDomainMapper,
+        movieToDomainMapper = movieToDomainMapper,
         httpExceptionToDomainMapper = httpExceptionToDomainMapper
     )
 

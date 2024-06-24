@@ -2,6 +2,7 @@ package com.movix.android.di
 
 import com.movix.shared.domain.MovieRepository
 import com.movix.shared.domain.base.CoroutineContextProvider
+import com.movix.shared.domain.interactor.GetMovieDetailUseCase
 import com.movix.shared.domain.interactor.GetNowPlayingUseCase
 import com.movix.shared.domain.interactor.GetPopularUseCase
 import com.movix.shared.domain.interactor.GetTopRatedUseCase
@@ -42,6 +43,15 @@ class DomainModule {
         movieRepository: MovieRepository,
         coroutineContextProvider: CoroutineContextProvider
     ): GetTopRatedUseCase = GetTopRatedUseCase(
+        movieRepository = movieRepository,
+        coroutineContextProvider = coroutineContextProvider
+    )
+
+    @Provides
+    fun provideGetDetailUseCase(
+        movieRepository: MovieRepository,
+        coroutineContextProvider: CoroutineContextProvider
+    ): GetMovieDetailUseCase = GetMovieDetailUseCase(
         movieRepository = movieRepository,
         coroutineContextProvider = coroutineContextProvider
     )
