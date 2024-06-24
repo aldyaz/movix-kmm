@@ -27,7 +27,8 @@ import com.movix.shared.presentation.model.HomeTabViewState
 
 @Composable
 fun MovieDiscoverTab(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onNavigateToDetail: (Long) -> Unit
 ) {
     val viewModel: AndroidMainMovieTabViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -36,14 +37,16 @@ fun MovieDiscoverTab(
     }
     MovieDiscoverTabContent(
         modifier = modifier,
-        uiState = uiState
+        uiState = uiState,
+        onClickItem = onNavigateToDetail
     )
 }
 
 @Composable
 fun MovieDiscoverTabContent(
     modifier: Modifier = Modifier,
-    uiState: HomeTabViewState
+    uiState: HomeTabViewState,
+    onClickItem: (Long) -> Unit
 ) {
     LazyColumn(
         modifier = modifier,
@@ -55,7 +58,7 @@ fun MovieDiscoverTabContent(
                 title = stringResource(R.string.label_now_playing),
                 state = uiState.nowPlaying,
                 onClickMore = {},
-                onClickItem = {}
+                onClickItem = onClickItem
             )
         }
         item {
@@ -64,7 +67,7 @@ fun MovieDiscoverTabContent(
                 title = stringResource(R.string.label_popular),
                 state = uiState.popular,
                 onClickMore = {},
-                onClickItem = {}
+                onClickItem = onClickItem
             )
         }
         item {
@@ -73,7 +76,7 @@ fun MovieDiscoverTabContent(
                 title = stringResource(R.string.label_top_rated),
                 state = uiState.topRated,
                 onClickMore = {},
-                onClickItem = {}
+                onClickItem = onClickItem
             )
         }
         item {

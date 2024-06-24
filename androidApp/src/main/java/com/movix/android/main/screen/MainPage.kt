@@ -18,7 +18,9 @@ import com.movix.android.main.viewmodel.MainViewModel
 import com.movix.android.main.model.MainTabType
 
 @Composable
-fun MainPage() {
+fun MainPage(
+    onNavigateToDetail: (Long) -> Unit
+) {
     val viewModel: MainViewModel = hiltViewModel()
 
     val selectedTab by viewModel.selectedTab
@@ -59,7 +61,8 @@ fun MainPage() {
             content = { type ->
                 when (type) {
                     MainTabType.MOVIE -> MovieDiscoverTab(
-                        modifier = modifier
+                        modifier = modifier,
+                        onNavigateToDetail = onNavigateToDetail
                     )
 
                     MainTabType.TV_SHOW -> TvShowDiscoverTab(

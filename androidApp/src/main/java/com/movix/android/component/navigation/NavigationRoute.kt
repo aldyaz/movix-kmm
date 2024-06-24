@@ -1,7 +1,19 @@
 package com.movix.android.component.navigation
 
-object NavigationRoute {
+sealed class NavigationRoute(
+    val route: String
+) {
 
-    const val MAIN = "main"
+    data object MAIN : NavigationRoute("main")
+
+    data object DETAIL : NavigationRoute("detail/{id}") {
+
+        private const val BASE_ROUTE = "detail"
+
+        const val ID = "id"
+
+        fun routeWith(id: Long): String = "$BASE_ROUTE/$id"
+
+    }
 
 }
