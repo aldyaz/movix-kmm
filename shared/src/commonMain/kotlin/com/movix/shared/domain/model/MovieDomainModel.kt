@@ -8,5 +8,7 @@ data class MovieDomainModel(
     val posterPath: String,
     val backdropPath: String,
     val releaseDate: String,
-    val genres: List<String>
+    val genres: List<String>,
+    val voteAverage: Double,
+    val runtime: Int
 )

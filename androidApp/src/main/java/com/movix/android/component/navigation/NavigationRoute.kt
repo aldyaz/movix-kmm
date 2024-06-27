@@ -4,11 +4,11 @@ sealed class NavigationRoute(
     val route: String
 ) {
 
-    data object MAIN : NavigationRoute("main")
+    data object Main : NavigationRoute("main")
 
-    data object DETAIL : NavigationRoute("detail/{id}") {
+    data object MovieDetail : NavigationRoute("movieDetail/{id}") {
 
-        private const val BASE_ROUTE = "detail"
+        private const val BASE_ROUTE = "movieDetail"
 
         const val ID = "id"
 

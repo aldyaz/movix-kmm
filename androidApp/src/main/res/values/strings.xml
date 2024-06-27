@@ -6,4 +6,7 @@
     <string name="label_top_rated">Top Rated</string>
     <string name="label_movie">Movie</string>
     <string name="label_tv_shows">TV Shows</string>
+    <string name="label_detail_release_date">Release date: %s</string>
+    <string name="label_detail_duration">Duration: %s</string>
+    <string name="label_overview">Overview</string>
 </resources>

@@ -16,7 +16,9 @@ class MovieToDomainMapper : (MovieDto) -> MovieDomainModel {
             releaseDate = p1.releaseDate.orEmpty(),
             genres = p1.genres?.map {
                 it.name.orEmpty()
-            }.orEmpty()
+            }.orEmpty(),
+            voteAverage = p1.voteAverage ?: 0.0,
+            runtime = p1.runtime ?: 0
         )
     }
 }

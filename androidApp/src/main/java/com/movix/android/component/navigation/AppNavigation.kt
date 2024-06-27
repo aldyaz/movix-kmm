@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.movix.android.detail.screen.DetailPage
+import com.movix.android.detail.screen.MovieDetailPage
 import com.movix.android.main.screen.MainPage
 
 @Composable
@@ -14,32 +14,32 @@ fun AppNavigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = NavigationRoute.MAIN.route
+        startDestination = NavigationRoute.Main.route
     ) {
         composable(
-            route = NavigationRoute.MAIN.route,
+            route = NavigationRoute.Main.route,
             arguments = emptyList()
         ) {
             MainPage(
                 onNavigateToDetail = { id ->
                     navController.navigate(
-                        NavigationRoute.DETAIL.routeWith(id)
+                        NavigationRoute.MovieDetail.routeWith(id)
                     )
                 }
             )
         }
 
         composable(
-            route = NavigationRoute.DETAIL.route,
+            route = NavigationRoute.MovieDetail.route,
             arguments = listOf(
-                navArgument(NavigationRoute.DETAIL.ID) {
+                navArgument(NavigationRoute.MovieDetail.ID) {
                     type = NavType.LongType
                 }
             )
         ) { navEntry ->
-            val id = navEntry.arguments?.getLong(NavigationRoute.DETAIL.ID)
-            id?.let {
-                DetailPage(it)
+            val id = navEntry.arguments?.getLong(NavigationRoute.MovieDetail.ID)
+            id?.also {
+                MovieDetailPage(it)
             }
         }
     }

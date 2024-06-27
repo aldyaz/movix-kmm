@@ -31,11 +31,7 @@ class KtorTmdbMovieRemoteService(
 
     override suspend fun getMovieDetail(id: Long): MovieDto {
         return apiCall {
-            httpClient.get("movie/{movie_id}") {
-                url {
-                    path(id.toString())
-                }
-            }
+            httpClient.get("movie/$id")
         }
     }
 }

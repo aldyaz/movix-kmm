@@ -8,5 +8,8 @@ data class MoviePresentationModel(
     val posterPath: String = "",
     val backdropPath: String = "",
     val releaseDate: String = "",
-    val genres: List<String> = emptyList()
+    val genres: List<String> = emptyList(),
+    val rating: Float = 0f,
+    val ratingStar: Float = 0f,
+    val duration: String = ""
 )
