@@ -10,15 +10,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -40,7 +42,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.movix.android.R
 import com.movix.android.component.chip.BaseChip
-import com.movix.android.component.misc.RatingBar
 import com.movix.shared.common.MovieImageApi
 
 @Composable
@@ -48,7 +49,6 @@ fun DetailHeaderSection(
     title: String,
     releaseDate: String,
     rating: Float,
-    ratingStar: Float,
     posterPath: String,
     backdropPath: String,
     showTimeDuration: String,
@@ -65,7 +65,7 @@ fun DetailHeaderSection(
                 .fillMaxWidth()
                 .aspectRatio(16f / 8f)
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Row(
             modifier = Modifier.padding(
                 horizontal = 16.dp
@@ -92,9 +92,10 @@ fun DetailHeaderSection(
                     overflow = TextOverflow.Ellipsis
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Rating(
-                    ratingStar = ratingStar,
-                    rating = rating
+                TextIcon(
+                    icon = Icons.Filled.Star,
+                    text = String.format("%.1f", rating),
+                    iconTint = MaterialTheme.colorScheme.tertiary
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextIcon(
@@ -192,32 +193,11 @@ fun GenresHorizontalScrollable(
 }
 
 @Composable
-private fun Rating(
-    ratingStar: Float,
-    rating: Float,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        RatingBar(
-            rating = ratingStar,
-            modifier = Modifier.height(16.dp)
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(
-            text = String.format("%.1f", rating),
-            style = MaterialTheme.typography.bodySmall
-        )
-    }
-}
-
-@Composable
 private fun TextIcon(
     icon: ImageVector,
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    iconTint: Color = LocalContentColor.current
 ) {
     Row(
         modifier = modifier,
@@ -227,7 +207,8 @@ private fun TextIcon(
         Icon(
             imageVector = icon,
             contentDescription = text,
-            modifier = Modifier.size(16.dp)
+            tint = iconTint,
+            modifier = Modifier.size(18.dp)
         )
         Text(
             text = text,

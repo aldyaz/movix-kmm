@@ -52,7 +52,7 @@ fun RatingStar(
     ) {
         Canvas(modifier = Modifier.size(maxHeight)) {
             drawRect(
-                brush = SolidColor(Color.Gray),
+                brush = SolidColor(Color.DarkGray),
                 size = Size(
                     width = size.width * 1.4f,
                     height = size.height * 1.4f
@@ -76,7 +76,7 @@ fun RatingStar(
     }
 }
 
-private val starShape = GenericShape { size, _ ->
+val starShape = GenericShape { size, _ ->
     addPath(starPath(size.height))
 }
 

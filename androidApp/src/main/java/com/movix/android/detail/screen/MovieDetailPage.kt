@@ -63,7 +63,6 @@ private fun MovieDetailContent(
                                 title = data.title,
                                 releaseDate = data.releaseDate,
                                 rating = data.rating,
-                                ratingStar = data.ratingStar,
                                 posterPath = data.posterPath,
                                 backdropPath = data.backdropPath,
                                 showTimeDuration = data.duration
@@ -76,7 +75,7 @@ private fun MovieDetailContent(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(
-                                        vertical = 12.dp
+                                        vertical = 16.dp
                                     )
                             )
                         }
