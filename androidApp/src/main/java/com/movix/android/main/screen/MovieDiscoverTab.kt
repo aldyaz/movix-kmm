@@ -101,7 +101,7 @@ fun DiscoverSection(
         )
         when {
             state.loading -> BasicCircularLoading(
-                modifier = Modifier.aspectRatio(4 / 3f)
+                modifier = Modifier.aspectRatio(4 / 1f)
             )
 
             state.error -> BasicError(
