@@ -17,11 +17,13 @@ fun BaseChip(
 ) {
     Text(
         text = category,
+        color = MaterialTheme.colorScheme.secondary,
+        style = MaterialTheme.typography.bodyMedium,
         modifier = modifier
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.onSurface,
-                shape = RoundedCornerShape(2.dp)
+                color = MaterialTheme.colorScheme.secondary,
+                shape = RoundedCornerShape(4.dp)
             )
             .padding(
                 vertical = 2.dp,
