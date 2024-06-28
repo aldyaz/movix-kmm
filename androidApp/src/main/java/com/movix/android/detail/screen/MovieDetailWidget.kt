@@ -36,6 +36,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -129,7 +130,7 @@ fun DetailOverviewSection(
         Spacer(modifier = Modifier.height(8.dp))
         ExpandedText(
             text = overview,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.fillMaxWidth()
         )
     }
@@ -160,6 +161,7 @@ private fun ExpandedText(
                 canTextExpandable = it.hasVisualOverflow
             }
         },
+        textAlign = TextAlign.Justify,
         style = style,
         modifier = Modifier
             .clickable(
