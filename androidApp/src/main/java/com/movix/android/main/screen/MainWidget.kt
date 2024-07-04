@@ -30,9 +30,9 @@ import com.movix.shared.common.MovieImageApi
 
 @Composable
 fun SectionHeader(
-    modifier: Modifier = Modifier,
     title: String,
-    onClickMore: () -> Unit
+    onClickMore: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
@@ -63,9 +63,9 @@ fun SectionHeader(
 
 @Composable
 fun MovieRowList(
-    modifier: Modifier = Modifier,
     items: List<MovieUiModel>,
-    onClickItem: (Long) -> Unit
+    onClickItem: (Long) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     LazyRow(
         modifier = modifier,
@@ -94,10 +94,10 @@ fun MovieRowList(
 
 @Composable
 fun MoviePoster(
-    modifier: Modifier = Modifier,
-    onClick: (() -> Unit)? = null,
     imageUrl: String,
-    contentDescription: String?
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null
 ) {
     Card(
         modifier = modifier,
