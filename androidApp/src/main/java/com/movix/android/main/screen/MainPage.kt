@@ -4,6 +4,7 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -30,31 +31,19 @@ fun MainPage(
     Scaffold(
         topBar = {
             MainAppBar(
-                onSearchClick = { /*TODO: Search screen*/ }
+                onSearchClick = { /*TODO: implement click*/ }
             )
         },
         bottomBar = {
-            NavigationBar {
-                tabs.forEach { type ->
-                    NavigationBarItem(
-                        selected = type == selectedTab,
-                        onClick = {
-                            viewModel.selectTab(type)
-                        },
-                        icon = {
-                            Icon(
-                                imageVector = type.icon,
-                                contentDescription = stringResource(type.title)
-                            )
-                        },
-                        label = {
-                            Text(stringResource(type.title))
-                        },
-                        modifier = Modifier.navigationBarsPadding()
-                    )
+            MainNavigationBar(
+                tabs = tabs,
+                selected = { it == selectedTab },
+                onSelectTab = {
+                    viewModel.selectTab(it)
                 }
-            }
-        }
+            )
+        },
+        modifier = Modifier.statusBarsPadding()
     ) { innerPadding ->
 
         val modifier = Modifier
@@ -77,5 +66,33 @@ fun MainPage(
                 }
             }
         )
+    }
+}
+
+@Composable
+fun MainNavigationBar(
+    tabs: Array<MainTabType>,
+    selected: (MainTabType) -> Boolean,
+    onSelectTab: (MainTabType) -> Unit
+) {
+    NavigationBar {
+        tabs.forEach { type ->
+            NavigationBarItem(
+                selected = selected(type),
+                onClick = {
+                    onSelectTab(type)
+                },
+                icon = {
+                    Icon(
+                        imageVector = type.icon,
+                        contentDescription = stringResource(type.title)
+                    )
+                },
+                label = {
+                    Text(stringResource(type.title))
+                },
+                modifier = Modifier.navigationBarsPadding()
+            )
+        }
     }
 }
