@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowRight
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -38,22 +37,25 @@ fun SectionHeader(
         modifier = modifier
             .fillMaxWidth()
             .padding(
-                horizontal = 12.dp,
-                vertical = 16.dp
+                vertical = 8.dp
             ),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             title,
-            style = MaterialTheme.typography.titleMedium,
-            textAlign = TextAlign.Center
+            style = MaterialTheme.typography.titleSmall,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(
+                start = 16.dp
+            )
         )
         Icon(
             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
             contentDescription = null,
             modifier = Modifier
                 .size(32.dp)
+                .padding(end = 8.dp)
                 .clickable {
                     onClickMore()
                 }
@@ -65,7 +67,7 @@ fun SectionHeader(
 fun MovieRowList(
     items: List<MovieUiModel>,
     onClickItem: (Long) -> Unit,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     LazyRow(
         modifier = modifier,
