@@ -103,7 +103,7 @@ fun MoviePoster(
 ) {
     Card(
         modifier = modifier,
-        shape = RoundedCornerShape(4.dp)
+        shape = RoundedCornerShape(8.dp)
     ) {
         Box(
             modifier = Modifier
