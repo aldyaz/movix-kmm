@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    alias(libs.plugins.composeCompiler)
 }
 
 android {
@@ -19,10 +20,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     packaging {
